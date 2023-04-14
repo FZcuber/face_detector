@@ -8,6 +8,7 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
+import axios from "axios";
 import "./App.css";
 
 const app = new Clarifai.App({
@@ -75,16 +76,18 @@ const App = () => {
         state.input
       );
       if (response) {
-        const updateResponse = await fetch("http://localhost:3000/image", {
-          method: "put",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        const updateResponse = await axios.put(
+          "http://localhost:3000/image",
+          {
             id: state.user.id,
-          }),
-        });
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
-        if (updateResponse.ok) {
-          const count = await updateResponse.json();
+        if (updateResponse.status === 200) {
+          const count = updateResponse.data;
           setState((prevState) => ({
             ...prevState,
             user: { ...prevState.user, entries: count },
