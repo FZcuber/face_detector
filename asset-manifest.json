@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/face_detector/static/css/main.80df36a9.css",
+    "main.js": "/face_detector/static/js/main.458b855c.js",
+    "static/media/brain.png": "/face_detector/static/media/brain.33148926b055f4b2e6d5.png",
+    "index.html": "/face_detector/index.html",
+    "main.80df36a9.css.map": "/face_detector/static/css/main.80df36a9.css.map",
+    "main.458b855c.js.map": "/face_detector/static/js/main.458b855c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.80df36a9.css",
+    "static/js/main.458b855c.js"
+  ]
+}
