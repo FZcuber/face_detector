@@ -1,0 +1,16 @@
+.bounding-box {
+  position: absolute;
+  box-shadow: 0 0 0 3px #149df2 inset, 0 0 10px 3px rgba(20, 157, 242, 0.5);
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+}
+
+.bounding-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px #149df2 inset, 0 0 15px 5px rgba(20, 157, 242, 0.75);
+}
