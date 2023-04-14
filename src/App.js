@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Clarifai from "clarifai";
 import ParticlesBg from "particles-bg";
 import Navigation from "./components/Navigation/Navigation";
@@ -9,6 +9,8 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 import axios from "axios";
+import MouseParticles from "react-mouse-particles";
+import { Shift } from "ambient-cbg";
 import "./App.css";
 
 const app = new Clarifai.App({
@@ -112,10 +114,15 @@ const App = () => {
   };
 
   const { isSignedIn, imageUrl, route, box } = state;
-  console.log(box);
   return (
     <div className="App">
-      <ParticlesBg type="square" bg={true} />
+      <Shift />
+      <MouseParticles
+        g={1}
+        color="random"
+        cull="MuiSvgIcon-root,MuiButton-root"
+        level={6}
+      />
       <Navigation isSignedIn={isSignedIn} onRouteChange={onRouteChange} />
       {route === "home" ? (
         <div>
