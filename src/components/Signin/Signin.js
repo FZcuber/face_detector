@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const Signin = ({ onRouteChange, loadUser }) => {
   const [signInEmail, setSignInEmail] = useState("");
@@ -12,22 +13,27 @@ const Signin = ({ onRouteChange, loadUser }) => {
     setSignInPassword(event.target.value);
   };
 
-  const onSubmitSignIn = () => {
-    fetch("http://localhost:3000/signin", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          loadUser(user);
-          onRouteChange("home");
+  const onSubmitSignIn = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/signin",
+        {
+          email: signInEmail,
+          password: signInPassword,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
         }
-      });
+      );
+
+      const user = response.data;
+      if (user.id) {
+        loadUser(user);
+        onRouteChange("home");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

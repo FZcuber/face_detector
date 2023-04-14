@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const Register = ({ loadUser, onRouteChange }) => {
   const [email, setEmail] = useState("");
@@ -17,24 +18,29 @@ const Register = ({ loadUser, onRouteChange }) => {
     setPassword(event.target.value);
   };
 
-  const onSubmitSignIn = (event) => {
+  const onSubmitSignIn = async (event) => {
     event.preventDefault();
-    fetch("http://localhost:3000/register", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          loadUser(user);
-          onRouteChange("home");
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/register",
+        {
+          email: email,
+          password: password,
+          name: name,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
         }
-      });
+      );
+
+      const user = response.data;
+      if (user.id) {
+        loadUser(user);
+        onRouteChange("home");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
