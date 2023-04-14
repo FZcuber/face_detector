@@ -18,7 +18,7 @@ const initialState = {
   input: "",
   imageUrl: "",
   box: {},
-  route: "signin",
+  route: "home",
   isSignedIn: false,
   user: {
     id: "",
@@ -103,6 +103,7 @@ const App = () => {
   };
 
   const { isSignedIn, imageUrl, route, box } = state;
+  console.log(box);
   return (
     <div className="App">
       <ParticlesBg type="square" bg={true} />
