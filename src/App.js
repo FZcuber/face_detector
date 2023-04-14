@@ -67,30 +67,36 @@ const App = () => {
     setState((prevState) => ({ ...prevState, input: event.target.value }));
   };
 
-  const onButtonSubmit = () => {
+  const onButtonSubmit = async () => {
     setState((prevState) => ({ ...prevState, imageUrl: state.input }));
-    app.models
-      .predict("general-image-detection", state.input)
-      .then((response) => {
-        if (response) {
-          fetch("http://localhost:3000/image", {
-            method: "put",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              id: state.user.id,
-            }),
-          })
-            .then((response) => response.json())
-            .then((count) => {
-              setState((prevState) => ({
-                ...prevState,
-                user: { ...prevState.user, entries: count },
-              }));
-            });
+    try {
+      const response = await app.models.predict(
+        "general-image-detection",
+        state.input
+      );
+      if (response) {
+        const updateResponse = await fetch("http://localhost:3000/image", {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: state.user.id,
+          }),
+        });
+
+        if (updateResponse.ok) {
+          const count = await updateResponse.json();
+          setState((prevState) => ({
+            ...prevState,
+            user: { ...prevState.user, entries: count },
+          }));
+        } else {
+          throw new Error(`HTTP error ${updateResponse.status}`);
         }
-        displayFaceBox(calculateFaceLocation(response));
-      })
-      .catch((err) => console.log(err));
+      }
+      displayFaceBox(calculateFaceLocation(response));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onRouteChange = (route) => {
