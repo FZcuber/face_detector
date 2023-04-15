@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Clarifai from "clarifai";
-import ParticlesBg from "particles-bg";
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import Rank from "./components/Rank/Rank";
@@ -21,7 +20,7 @@ const initialState = {
   input: "",
   imageUrl: "",
   box: {},
-  route: "home",
+  route: "signin",
   isSignedIn: false,
   user: {
     id: "",
