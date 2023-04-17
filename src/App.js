@@ -13,7 +13,7 @@ import { Shift } from "ambient-cbg";
 import "./App.css";
 
 const app = new Clarifai.App({
-  apiKey: "ba96abe91f2c46d9b78d78e71b92e963",
+  //insert your own api key
 });
 
 const initialState = {
