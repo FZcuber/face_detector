@@ -2,7 +2,7 @@
 
 This is a face detection app built using React and Clarifai API. The app allows users to register and sign in, and then submit an image URL to detect the location of a face in the image.
 To view a live demo of the application, simply go to [link](https://fzcuber.github.io/face_detector/) and sign in as user 1 and password 1. Do note that login isn't available because the current github pages deployment doesn't host server and database.
-This is a recording of full functionality.
+The demo below shows full functionality.
 
 ## Prerequisites
 
